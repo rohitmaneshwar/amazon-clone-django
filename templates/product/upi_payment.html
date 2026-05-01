@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 mb-5 text-center" style="max-width: 600px;">
+    <div class="card shadow-lg border-0" style="border-radius: 15px;">
+        <div class="card-header bg-dark text-white p-3" style="border-radius: 15px 15px 0 0;">
+            <h4 class="mb-0">Scan & Pay using any UPI App</h4>
+        </div>
+        <div class="card-body p-5">
+            <h5 class="text-muted mb-4">Merchant: Amazon Clone</h5>
+            <!-- Dummy QR Code Image -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="UPI QR Code" style="width: 250px; border: 5px solid #eee; padding: 10px; border-radius: 10px;">
+            <h3 class="mt-4 text-success fw-bold">Scan to Pay</h3>
+            <p class="text-muted">Do not refresh this page. After payment, click the button below.</p>
+            
+            <form action="{% url 'order_success' %}" method="POST" class="mt-4">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-lg w-100 fw-bold" style="background-color: #ffd814; border-color: #fcd200;">I have completed the payment</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

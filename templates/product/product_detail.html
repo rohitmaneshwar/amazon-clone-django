@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <style>
+    /* Amazon Product Page Styles */
+    .amz-buy-box {
+      border: 1px solid #d5d9d9;
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .amz-btn-cart {
+      background-color: #ffd814;
+      border: 1px solid #fcd200;
+      border-radius: 50px;
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+      cursor: pointer;
+    }
+    .amz-btn-cart:hover {
+      background-color: #f7ca00;
+    }
+    .amz-btn-buy {
+      background-color: #ffa41c;
+      border: 1px solid #ff8f00;
+      border-radius: 50px;
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .amz-btn-buy:hover {
+      background-color: #fa8900;
+    }
+    
+    /* Thumbnail Sidebar */
+    .thumbnail-img {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #a2a6ac;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      object-fit: contain;
+      padding: 2px;
+    }
+    .thumbnail-img:hover,
+    .thumbnail-img.active {
+      border-color: #e77600;
+      box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
+    }
+  </style>
+
+  <div class="container mt-4 mb-5 bg-white p-4" style="max-width: 1200px;">
+    <div class="row">
+      <!-- 1. Left Section: Images -->
+      <div class="col-md-5 d-flex">
+        <!-- Left mini thumbnails -->
+        <div class="thumbnails me-3 d-flex flex-column">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" class="thumbnail-img active" />
+          {% endif %}
+          <!-- Fake thumbnails for extra visual effect -->
+          <div class="thumbnail-img bg-light d-flex align-items-center justify-content-center text-muted text-center" style="font-size:9px; line-height:1;">
+            Side<br />View
+          </div>
+          <div class="thumbnail-img bg-light d-flex align-items-center justify-content-center text-muted text-center" style="font-size:9px; line-height:1;">
+            Back<br />View
+          </div>
+        </div>
+        <!-- Main big image -->
+        <div class="main-image d-flex justify-content-center align-items-start w-100">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" style="max-width: 100%; max-height: 500px; object-fit: contain;" />
+          {% else %}
+            <div style="height: 400px; width: 100%; background-color: #f8f9fa;" class="d-flex justify-content-center align-items-center">No Image Available</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- 2. Center Section: Product Details -->
+      <div class="col-md-4 px-4">
+        <h3 class="fw-normal fs-4 mb-1">{{ product.name }}</h3>
+        <a href="#reviews" class="text-decoration-none" style="color: #007185; font-size: 14px;">⭐⭐⭐⭐☆ 1,245 ratings</a>
+
+        <hr class="my-3" />
+
+        <!-- Price Section -->
+        <div class="d-flex align-items-start mb-1">
+          <span class="text-danger fw-bold me-2" style="font-size: 24px;">-45%</span>
+          <h4 class="text-dark fw-bold m-0" style="font-size: 28px;"><span style="font-size: 14px; position: relative; top: -10px;">₹</span>{{ product.price }}</h4>
+        </div>
+        <p class="text-muted small m-0">Inclusive of all taxes</p>
+        <p class="small m-0">
+          <strong>EMI</strong> starts at ₹350. No Cost EMI available
+        </p>
+
+        <hr class="my-3" />
+
+        <!-- Description / Bullet Points -->
+        <h6 class="fw-bold">About this item</h6>
+        <ul style="font-size: 14px; padding-left: 20px;">
+          <li>{{ product.description|default:'Top quality product manufactured with the best materials.' }}</li>
+          <li>Comes with standard manufacturer warranty.</li>
+          <li>Easy 7 days return and replacement policy.</li>
+        </ul>
+      </div>
+
+      <!-- 3. Right Section: Buy Box -->
+      <div class="col-md-3">
+        <div class="amz-buy-box">
+          <h5 class="fw-bold mb-3"><span style="font-size: 14px; position: relative; top: -5px;">₹</span>{{ product.price }}</h5>
+          <p class="text-primary small mb-2">
+            <span class="fw-bold text-dark">FREE delivery</span> Friday, 8 May. Order within 15 hrs 30 mins.
+          </p>
+          <p class="small mb-3">
+            📍 <a href="#" style="color: #007185; text-decoration: none;">Deliver to {{ request.user.first_name|default:'India' }}</a>
+          </p>
+
+          <h5 class="text-success fw-bold fs-6 mb-3">In stock</h5>
+
+          <form action="#" method="POST">
+            {% csrf_token %}
+            <select class="form-select form-select-sm mb-3 shadow-sm border-secondary" style="width: 70px;">
+              <option value="1">Qty: 1</option>
+              <option value="2">Qty: 2</option>
+              <option value="3">Qty: 3</option>
+            </select>
+
+            <a href="{% url 'add_to_cart' product.id %}" class="btn amz-btn-cart mb-2 text-dark text-decoration-none fw-bold shadow-sm d-block text-center">Add to Cart</a>
+            <a href="{% url 'checkout' %}" class="btn amz-btn-buy text-dark text-decoration-none fw-bold shadow-sm d-block text-center">Buy Now</a>
+          </form>
+
+          <div class="mt-3 small" style="color: #565959;">
+            <div class="d-flex justify-content-between mb-1">
+              <span>Ships from</span><span>Amazon</span>
+            </div>
+            <div class="d-flex justify-content-between mb-1">
+              <span>Sold by</span><span>RetailNet</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>Returns</span><span>7 days Replacement</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr style="border-color: #d5d9d9; margin: 40px 0;" />
+
+    <!-- 4. Customer Reviews & Testimonials -->
+    <div id="reviews" class="row">
+      <div class="col-md-12">
+        <h4 class="fw-bold mb-4">Customer Reviews & Testimonials</h4>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="d-flex align-items-center mb-1">
+              <div class="rounded-circle bg-secondary text-white d-flex justify-content-center align-items-center me-2" style="width: 34px; height: 34px;">R</div>
+              <span class="fw-bold small">Rahul Sharma</span>
+            </div>
+            <h6 class="fw-bold m-0" style="font-size: 14px;">⭐⭐⭐⭐⭐ Great quality!</h6>
+            <p class="text-muted" style="font-size: 12px;">Reviewed in India on 12 April 2026</p>
+            <p class="small">Absolutely loved the build quality. Delivery was super fast as usual. Highly recommended.</p>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="d-flex align-items-center mb-1">
+              <div class="rounded-circle bg-secondary text-white d-flex justify-content-center align-items-center me-2" style="width: 34px; height: 34px;">P</div>
+              <span class="fw-bold small">Priya Singh</span>
+            </div>
+            <h6 class="fw-bold m-0" style="font-size: 14px;">⭐⭐⭐⭐☆ Value for money</h6>
+            <p class="text-muted" style="font-size: 12px;">Reviewed in India on 28 March 2026</p>
+            <p class="small">Good product for this price range. Looks exactly like the pictures provided on the site.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

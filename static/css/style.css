@@ -1,0 +1,63 @@
+/* style.css */
+
+/* Amazon Exact Colors Setup */
+:root {
+    --amz-dark: #131921;         /* Main Navbar (Black/Navy) */
+    --amz-light-nav: #232f3e;    /* Sub Navbar (Greyish Navy) */
+    --amz-orange: #febd69;       /* Search Button / Add to Cart */
+    --amz-orange-hover: #f3a847; /* Hover effect for buttons */
+    --amz-bg: #eaeded;           /* Body Background (Light Grey) */
+    --amz-link: #007185;         /* Links Color (Teal) */
+    --amz-price: #B12704;        /* Price Color (Dark Red) */
+}
+
+body {
+    background-color: var(--amz-bg);
+    font-family: Arial, sans-serif; /* Ya phir 'Open Sans' lagao */
+    margin: 0;
+    padding: 0;
+}
+
+/* Amazon Style Navbar */
+.amazon-navbar {
+    background-color: var(--amz-dark);
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* Search Bar Styling */
+.amz-search-bar {
+    display: flex;
+    flex-grow: 1;
+    margin: 0 15px;
+    border-radius: 4px;
+    overflow: hidden; /* Taaki corners round rahein */
+}
+
+.amz-search-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+.amz-search-btn {
+    background-color: var(--amz-orange);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.amz-search-btn:hover {
+    background-color: var(--amz-orange-hover);
+}
+
+/* Product Cards Container */
+.amz-card {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    z-index: 1; /* Hero image ke upar dikhane ke liye */
+}

