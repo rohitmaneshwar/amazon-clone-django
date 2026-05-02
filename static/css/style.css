@@ -1,26 +1,26 @@
 /* style.css */
 
-/* Amazon Exact Colors Setup */
+/* Modern Blue Theme Setup */
 :root {
-    --amz-dark: #131921;         /* Main Navbar (Black/Navy) */
-    --amz-light-nav: #232f3e;    /* Sub Navbar (Greyish Navy) */
-    --amz-orange: #febd69;       /* Search Button / Add to Cart */
-    --amz-orange-hover: #f3a847; /* Hover effect for buttons */
-    --amz-bg: #eaeded;           /* Body Background (Light Grey) */
-    --amz-link: #007185;         /* Links Color (Teal) */
-    --amz-price: #B12704;        /* Price Color (Dark Red) */
+    --theme-dark: #1e293b;        /* Main Navbar (Slate Dark) */
+    --theme-light-nav: #334155;   /* Sub Navbar (Slate Grey) */
+    --theme-primary: #3b82f6;     /* Search Button / Add to Cart (Blue) */
+    --theme-primary-hover: #2563eb; /* Hover effect (Darker Blue) */
+    --theme-bg: #f1f5f9;          /* Body Background (Light Grey) */
+    --theme-link: #0284c7;        /* Links Color (Teal/Blue) */
+    --theme-price: #e11d48;       /* Price Color (Rose Red) */
 }
 
 body {
-    background-color: var(--amz-bg);
-    font-family: Arial, sans-serif; /* Ya phir 'Open Sans' lagao */
+    background-color: var(--theme-bg);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Amazon Style Navbar */
+/* Navbar */
 .amazon-navbar {
-    background-color: var(--amz-dark);
+    background-color: var(--theme-dark);
     color: white;
     padding: 10px;
     display: flex;
@@ -32,8 +32,8 @@ body {
     display: flex;
     flex-grow: 1;
     margin: 0 15px;
-    border-radius: 4px;
-    overflow: hidden; /* Taaki corners round rahein */
+    border-radius: 6px;
+    overflow: hidden; 
 }
 
 .amz-search-input {
@@ -44,14 +44,15 @@ body {
 }
 
 .amz-search-btn {
-    background-color: var(--amz-orange);
+    background-color: var(--theme-primary);
+    color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
 }
 
 .amz-search-btn:hover {
-    background-color: var(--amz-orange-hover);
+    background-color: var(--theme-primary-hover);
 }
 
 /* Product Cards Container */
@@ -59,5 +60,6 @@ body {
     background-color: white;
     padding: 20px;
     margin-bottom: 20px;
-    z-index: 1; /* Hero image ke upar dikhane ke liye */
+    border-radius: 8px; /* Thoda modern look */
+    z-index: 1; 
 }
