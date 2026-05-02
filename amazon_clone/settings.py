@@ -89,6 +89,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # --- RENDER KE LIYE NAYI LINE (Build Error Fix) ---
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Media Files (User dwara upload ki gayi products ki photos)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
