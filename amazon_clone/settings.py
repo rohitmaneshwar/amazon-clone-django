@@ -12,7 +12,7 @@ SECRET_KEY = 'django-insecure-your-secret-key-here'
 # Debug mode ON hai (taaki errors screen par dikhein)
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Apps Configuration
 INSTALLED_APPS = [
