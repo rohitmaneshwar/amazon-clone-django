@@ -85,6 +85,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+# --- RENDER KE LIYE NAYI LINE (Build Error Fix) ---
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 # Media Files (User dwara upload ki gayi products ki photos)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
