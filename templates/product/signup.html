@@ -1,70 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Amazon Registration</title>
     <style>
-        body { background-color: #fff; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; padding-top: 15px; margin: 0; }
-        .logo-container { margin-bottom: 15px; }
-        .logo-container img { width: 105px; object-fit: contain; }
-        .signup-box { width: 350px; border: 1px solid #ddd; border-radius: 8px; padding: 20px 26px; box-sizing: border-box; }
-        .signup-box h1 { font-size: 28px; font-weight: 400; margin-top: 0; margin-bottom: 20px; }
-        .form-label { font-size: 13px; font-weight: 700; margin-bottom: 4px; display: block; }
-        .form-control { width: 100%; padding: 6px 10px; margin-bottom: 15px; border: 1px solid #a6a6a6; border-radius: 3px; box-sizing: border-box; height: 31px; outline: none; }
-        .form-control:focus { border-color: #e77600; box-shadow: 0 0 3px 2px rgba(228,121,17,.5); }
-        .btn-continue { width: 100%; background-color: #f0c14b; border: 1px solid; border-color: #a88734 #9c7e31 #846a29; border-radius: 3px; padding: 7px; cursor: pointer; font-size: 13px; box-shadow: 0 1px 0 rgba(255,255,255,.4) inset; margin-top: 10px; }
-        .btn-continue:hover { background-color: #e3b037; }
-        .legal-text { font-size: 12px; margin-top: 15px; line-height: 1.5; }
-        .legal-text a { color: #0066c0; text-decoration: none; }
-        .legal-text a:hover { text-decoration: underline; color: #c45500; }
-        .error-msg { color: #c40000; font-size: 13px; margin-bottom: 15px; font-weight: bold; }
-        .signin-link { font-size: 13px; margin-top: 20px; }
-        .signin-link a { color: #0066c0; text-decoration: none; }
-        .signin-link a:hover { text-decoration: underline; color: #c45500; }
-        .password-info { font-size: 11px; color: #333; margin-top: -12px; margin-bottom: 15px; display: block; }
+      body {
+        background-color: #fff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 15px;
+        margin: 0;
+      }
+      .logo-container {
+        margin-bottom: 15px;
+      }
+      .logo-container img {
+        width: 105px;
+        object-fit: contain;
+      }
+      .signup-box {
+        width: 350px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px 26px;
+        box-sizing: border-box;
+      }
+      .signup-box h1 {
+        font-size: 28px;
+        font-weight: 400;
+        margin-top: 0;
+        margin-bottom: 20px;
+      }
+      .form-label {
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 4px;
+        display: block;
+      }
+      .form-control {
+        width: 100%;
+        padding: 6px 10px;
+        margin-bottom: 15px;
+        border: 1px solid #a6a6a6;
+        border-radius: 3px;
+        box-sizing: border-box;
+        height: 31px;
+        outline: none;
+      }
+      .form-control:focus {
+        border-color: #e77600;
+        box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
+      }
+      .btn-continue {
+        width: 100%;
+        background-color: #f0c14b;
+        border: 1px solid;
+        border-color: #a88734 #9c7e31 #846a29;
+        border-radius: 3px;
+        padding: 7px;
+        cursor: pointer;
+        font-size: 13px;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+        margin-top: 10px;
+      }
+      .btn-continue:hover {
+        background-color: #e3b037;
+      }
+      .legal-text {
+        font-size: 12px;
+        margin-top: 15px;
+        line-height: 1.5;
+      }
+      .legal-text a {
+        color: #0066c0;
+        text-decoration: none;
+      }
+      .legal-text a:hover {
+        text-decoration: underline;
+        color: #c45500;
+      }
+      .error-msg {
+        color: #c40000;
+        font-size: 13px;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+      .signin-link {
+        font-size: 13px;
+        margin-top: 20px;
+      }
+      .signin-link a {
+        color: #0066c0;
+        text-decoration: none;
+      }
+      .signin-link a:hover {
+        text-decoration: underline;
+        color: #c45500;
+      }
+      .password-info {
+        font-size: 11px;
+        color: #333;
+        margin-top: -12px;
+        margin-bottom: 15px;
+        display: block;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="logo-container">
-        <a href="/"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon"></a>
+      <a href="/"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" /></a>
     </div>
 
     <div class="signup-box">
-        <h1>Create Account</h1>
-        
-        <!-- Error message yahan dikhega -->
-        {% if error %}
-            <div class="error-msg">⚠️ {{ error }}</div>
-        {% endif %}
+      <h1>Create Account</h1>
 
-        <form method="POST">
-            {% csrf_token %}
-            <label class="form-label">Your name</label>
-            <input type="text" name="name" class="form-control" placeholder="First and last name" required>
+      <!-- Error message yahan dikhega -->
+      {% if error %}
+        <div class="error-msg">⚠️ {{ error }}</div>
+      {% endif %}
 
-            <label class="form-label">Mobile number or email</label>
-            <input type="email" name="email" class="form-control" required>
+      <div style="background-color: #ffeeba; color: #856404; padding: 10px; text-align: center; margin-bottom: 15px; border-radius: 5px; font-size: 14px;">
+        <strong>⚠️ Disclaimer:</strong> This is a dummy project built by Rohit Maneshwar for learning and portfolio purposes only. It is not affiliated with Amazon. <b>Please do not enter your real passwords here.</b>
+      </div>
 
-            <label class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" placeholder="At least 6 characters" minlength="6" required>
-            <span class="password-info">Passwords must be at least 6 characters.</span>
+      <form method="POST">
+        {% csrf_token %}
+        <label class="form-label">Your name</label>
+        <input type="text" name="name" class="form-control" placeholder="First and last name" required />
 
-            <label class="form-label">Password again</label>
-            <input type="password" name="confirm_password" class="form-control" required>
+        <label class="form-label">Mobile number or email</label>
+        <input type="email" name="email" class="form-control" required />
 
-            <button type="submit" class="btn-continue">Continue</button>
-        </form>
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="At least 6 characters" minlength="6" required />
+        <span class="password-info">Passwords must be at least 6 characters.</span>
 
-        <p class="legal-text">
-            By creating an account, you agree to Amazon's <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.
-        </p>
+        <label class="form-label">Password again</label>
+        <input type="password" name="confirm_password" class="form-control" required />
 
-        <div class="signin-link">
-            Already have an account? <a href="{% url 'login' %}">Sign in </a>
-        </div>
+        <button type="submit" class="btn-continue">Continue</button>
+      </form>
+
+      <p class="legal-text">
+        By creating an account, you agree to Amazon's <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.
+      </p>
+
+      <div class="signin-link">
+        Already have an account? <a href="{% url 'login' %}">Sign in</a>
+      </div>
     </div>
-
-</body>
+  </body>
 </html>

@@ -138,6 +138,10 @@
         <div class="error-msg">⚠️ {{ error }}</div>
       {% endif %}
 
+      <div style="background-color: #ffeeba; color: #856404; padding: 10px; text-align: center; margin-bottom: 15px; border-radius: 5px; font-size: 14px;">
+        <strong>⚠️ Disclaimer:</strong> This is a dummy project built by Rohit Maneshwar for learning and portfolio purposes only. It is not affiliated with Amazon. <b>Please do not enter your real passwords here.</b>
+      </div>
+
       <form method="POST">
         {% csrf_token %}
         <label class="form-label">Email or mobile phone number</label>
